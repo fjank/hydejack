@@ -51,6 +51,10 @@ author:
   # email:               <em-address>
   # Used by `jekyll-seo-tag`:
   # twitter:             <username>
+  about: |
+    Mainly a java-developer, but has played with C++, javascript, html,
+    css, php, python and perl. Especially interested in performance and
+    security
 
 # Add links to the sidebar.
 menu:
@@ -102,12 +106,9 @@ font_heading:          Roboto Slab, Helvetica, Arial, sans-serif
 
 defaults:
   - scope:
-      path:            hyde
+      type:            posts
     values:
-      accent_color:    rgb(38,139,210)
-      accent_image:
-        background:    rgb(32,32,32)
-        overlay:       false
+      comments:        true
 
   # `jekyll-seo-tag` will mark collection outputs as `BlogPosting`,
   # but we want them to be `WebPage`s:
@@ -137,7 +138,7 @@ defaults:
 
 # Setting a disqus shortname will enable the comment section on
 # pages with `comments: true` in the front matter.
-# disqus:                <disqus_shortname>
+disqus:                fjank-no
 
 # Setting a tinyletter username will enable the newsletter subscription box.
 # tinyletter:            <tinyletter_username>
