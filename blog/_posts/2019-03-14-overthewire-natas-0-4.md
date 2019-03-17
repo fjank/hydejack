@@ -1,6 +1,6 @@
 ---
 layout: post
-title: OverTheWire
+title: OverTheWire natas 0-4
 description: >
   A walkthrough of OverTheWire natas 0-4 with tool recommendations,
   recommendations for further reading, recommendations for protecting your server
@@ -101,3 +101,5 @@ It seems the referer header was the correct assumption, and the page delivered
 the password for the next level.
 
 _Lessons learned: Do not trust the browser, everything can be faked._
+
+[Read Next - OverTheWire level 5-9 walkthrough.](2019-03-17-overthewire-natas-5-9.md)
