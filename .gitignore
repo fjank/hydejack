@@ -46,4 +46,5 @@ vendor/bundle
 *.gem
 _zip
 
-#<removed>
+# Webmention cache
+/.jekyll-cache/
