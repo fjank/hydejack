@@ -12,11 +12,10 @@ description: >
 [Read Previous - OverTheWire level 0-4 walkthrough.](2019-03-14-overthewire-natas-0-4.md)
 ## Introduction
 [OverTheWire](http://overthewire.org) is a wargame site with several challenges.
-For a beginner like me, it contains several challenges with a nice increase in
+For a beginner it contains several challenges with a nice increase in
 difficulty.
 This is the second entry of a writeup of the [natas](http://overthewire.org/wargames/natas/)
-challenges, which teaches the basics of serverside web-security. I will not
-expose the actual passwords, but rather walk you through the mind-process
+challenges, which teaches the basics of serverside web-security. I will walk you through the mind-process
 of searching for and finding vulnerabilities.
 
 By going through all the levels of these challenges, you will learn how to
@@ -25,9 +24,8 @@ tools such as: html, server configuration, browser developer tools,
 basic shell commands, vulnerability checker tools, kali linux and get some basic
 programming experience.
 
-## Level 5
+## [Level 5]()
 **Tools recommended:** [Burp Suite](https://portswigger.net/).
-{:.message}
 Here we are met with a page stating that we are not logged in, and no interaction features.
 ![Natas 5 landing page](/assets/img/overthewire-natas5-1.png)
 The source code looks equally empty. In some way the site has figured out that we are not logged in, so lets look at 
@@ -53,9 +51,13 @@ result, you will see the the server is now happy, and gives you the password for
 Also take a look at the raw tab, to see what you actually sent to the server. You could also change the values directly 
 in the raw tab.
 
-_Lessons learned: Don't store data at all in the cookies, they are easily spoofed._
+_Don't store data at all in the cookies, they are easily spoofed._
+<details>
+  <summary>Spoiler</summary>
+  natas6: aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
+</details>
 
-## Level 6
+## [Level 6](http://natas6.natas.labs.overthewire.org/)
 This time we are met with a page with an input field "Input secret", and a submit button, and it also seems we have 
 a link to the server side source code for help. A few tests with the input field, gives us "Wrong secret". 
 So obviously we need to find the correct secret to solve this one.
@@ -96,9 +98,13 @@ A request for [natas6.natas.labs.overthewire.org/includes/secret.inc](http://nat
 secret is exposed. Now it's just a matter of writing in the correct secret and submit, then you get the password for the
 next level.
 
-_Lessons learned: If you have files with sensitive data, don't leave them in the web-published folder. They will be found._
+_If you have files with sensitive data, don't leave them in the web-published folder. They will be found._
+<details>
+  <summary>Spoiler</summary>
+  natas7: 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+</details>
 
-## Level 7
+## [Level 7](http://natas7.natas.labs.overthewire.org/)
 This level has two links, "Home" and "About".
 ![Natas 7 landing page](/assets/img/overthewire-natas7-1.png)
 By clicking the links, we see that there is a variable that changes, that allows us to change the page that is loaded.
@@ -117,8 +123,11 @@ As was stated in the beginning of the challenges, the passwords are stored at `/
 so we should try to use that as a page [natas7.natas.labs.overthewire.org/index.php?page=/etc/natas_webpass/natas8](http://natas7.natas.labs.overthewire.org/index.php?page=/etc/natas_webpass/natas8)
 That should give us the password for the next level.
 
-_Lessons learned: Don't trust parameters from the browser. Never put un-sanitized data into an php include. Don't expose error messages to the browser._
-
+_Don't trust parameters from the browser. Never put un-sanitized data into an php include. Don't expose error messages to the browser._
+<details>
+  <summary>Spoiler</summary>
+  natas8: DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+</details>
 
 ## Level 8
 Hm, seems like a repeat of level 6, probably a bit hardened this time. A secret input field, a submit button, and a link
@@ -186,16 +195,20 @@ for the lext level:
 ~~~python
 import binascii
 import base64
-encodedSecred = '3d3d516343746d4d6d6c315669563362'
+encodedSecret = '3d3d516343746d4d6d6c315669563362'
 reversed = binascii.unhexlify(encodedSecret).decode('ISO-8859-1')
 b64 = reversed[::-1]
 secret = base64.b64decode(b64).decode('ISO-8859-1')
 print(secret)
 ~~~
 
-_Lessons learned: If you want to encrypt something, use a one-way encryption algorithm. Encodings like this are easily broken._
+_If you want to encrypt something, use a one-way encryption algorithm. Encodings like this are easily broken._
+<details>
+  <summary>Spoiler</summary>
+  natas9: W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+</details>
 
-## Level 9
+## [Level 9](http://natas9.natas.labs.overthewire.org/)
 We are on this level met with something that looks like a search. inputting various text into the search gives us a list
 of the words that contain the input. This time also they have been kind enough to give us the server source code.
 ![Natas 9 landing page](/assets/img/overthewire-natas9-1.png)
@@ -246,6 +259,12 @@ grep -i nonono dictionary.txt; ls -al; # dictionary.txt
 # The final string has now been made to a comment, doing nothing.
 ~~~
 Seems we got the directory listing, so command injection was successful.
-It should now be quite easy to get the password for the next level using [cat](https://ss64.com/bash/cat.html).
+It should now be quite easy to get the password for the next level using [cat](https://ss64.com/bash/cat.html).  
+`nonono dictionary.txt;cat /etc/natas_webpass/natas10; #`  
+_Avoid user controlled input to include/passtru or similar in other languages. If unavoidable, at least sanitize the input first._
+<details>
+  <summary>Spoiler</summary>
+  natas10: nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+</details>
 
-_Lessons learned: Avoid user controlled input to include/passtru or similar in other languages. If unavoidable, at least sanitize the input first._
+[Read Next - OverTheWire level 10-14 walkthrough.](2019-03-18-overthewire-natas-10-14.md)

@@ -11,11 +11,10 @@ description: >
 
 ## Introduction
 [OverTheWire](http://overthewire.org) is a wargame site with several challenges.
-For a beginner like me, it contains several challenges with a nice increase in
+For a beginner, it contains several challenges with a nice increase in
 difficulty.
 This is the first entry of a writeup of the [natas](http://overthewire.org/wargames/natas/)
-challenges, which teaches the basics of serverside web-security. I will not
-expose the actual passwords, but rather walk you through the mind-process
+challenges, which teaches the basics of serverside web-security. I will try to walk you through the mind-process
 of searching for and finding vulnerabilities.
 
 By going through all the levels of these challenges, you will learn how to
@@ -24,25 +23,30 @@ tools such as: html, server configuration, browser developer tools,
 basic shell commands, vulnerability checker tools, kali linux and get some basic
 programming experience.
 
-## Level 0
+## [Level 0](http://natas0.natas.labs.overthewire.org) 
 **Tools recommended:** A browser. I use [Chrome](https://www.google.com/chrome/)
 or [Firefox](https://www.mozilla.org/en-US/firefox/new/).
-{:.message}
+User/Pass: natas0/natas0
 View [the source](https://www.w3schools.com/html/html_intro.asp),
-and look for the comment with the password for the next level.
+and look for the comment with the password for the next level.  
+_Don't leave comments with sensitive data, they are easy to find._
+<details>
+  <summary>Spoiler</summary>
+  natas1: gtVrDuiDfck831PqWsLEZy5gyDz1clto
+</details>
 
-_Lessons learned: Don't leave comments with sensitive data, they are easy to find._
-
-## Level 1
+## [Level 1](http://natas1.natas.labs.overthewire.org)
 Use the web developer tools ([Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/),
 [Firefox developer tools](https://developer.mozilla.org/en-US/docs/Tools))
-to show the source where you will find the password.
+to show the source where you will find the password.  
+_Blocking right-click is useless._
+<details>
+  <summary>Spoiler</summary>
+  natas2: ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi
+</details>
 
-_Lessons learned: Blocking right-click is useless._
-
-## Level 2
+## [Level 2](http://natas2.natas.labs.overthewire.org)
 **Tools recommended:** [A shell](http://linuxcommand.org/lc3_lts0010.php).
-{:.message}
 As the page says, there is nothing on this page.
 As in the previous level, I started by looking at the source, this time there
 was nothing hidden in the source, except a reference to an image.  
@@ -54,18 +58,21 @@ in the image, nada.
 $ cat pixel.png
 ~~~
 Perhaps there are other files in the same folder as the image? Lets try to open
-the folder in the browser: http://natas2.natas.labs.overthewire.org/files/.  
+the folder in the browser: [http://natas2.natas.labs.overthewire.org/files/](http://natas2.natas.labs.overthewire.org/files/).  
 Directory browsing is allowed, thus we see all the files including a file
-containing the password to the next level.
+containing the password to the next level.  
+_Make sure directory browsing is disabled._
+<details>
+  <summary>Spoiler</summary>
+  natas3: sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+</details>
 
-_Lessons learned: Make sure directory browsing is disabled._
-
-## Level 3
+## [Level 3](http://natas3.natas.labs.overthewire.org)
 **Tools recommended:** [dirb](https://tools.kali.org/web-applications/dirb)/[dirbuster](https://www.owasp.org/index.php/Category:OWASP_DirBuster_Project)/[Kali linux](https://www.kali.org/).
 You can manage nicely at this point
 without using any of these tools, but everything will be easier if you install
 Kali linux, as it contains massive amount of tools, almost everything you need.
-{:.message}
+
 Another page where there is nothing on the page.
 The source contains a comment with a hint. Since I hate to guess, I used `dirb`
 to enumerate all common files/directories that may be found on a server.
@@ -73,14 +80,16 @@ to enumerate all common files/directories that may be found on a server.
 $ dirb http://natas3.natas.labs.overthewire.org -u natas3:<passwd>
 ~~~
 Amongst the output you should find an interesting file: `robots.txt`  
-The [robots file](http://www.robotstxt.org/) revealed a hidden directory (still with directory browsing enabled),
-where a file containing the password to the next level can be found.
+The [robots file](http://www.robotstxt.org/) revealed a hidden [directory](http://natas3.natas.labs.overthewire.org/s3cr3t/) (still with directory browsing enabled),
+where a [file](http://natas3.natas.labs.overthewire.org/s3cr3t/users.txt) containing the password to the next level can be found.  
+_robots.txt should not expose sensitive information._
+<details>
+  <summary>Spoiler</summary>
+  natas4: Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+</details>
 
-_Lessons learned: robots.txt should not expose sensitive information._
-
-## Level 4
+## [Level 4](http://natas4.natas.labs.overthewire.org/)
 **Tools recommended:** [wget](https://www.gnu.org/software/wget/manual/wget.html)
-{:.message}
 The text on the page says it all. The way the page knows where we are coming
 from is usually by inspecting the [Referer header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer).
 This can easily be faked, and there are tons of tools that can do this for us.
@@ -100,6 +109,10 @@ $ wget --quiet --referer=http://natas5.natas.labs.overthewire.org/ -O - http://n
 It seems the referer header was the correct assumption, and the page delivered
 the password for the next level.
 
-_Lessons learned: Do not trust the browser, everything can be faked._
+_Do not trust the browser, everything can be faked._
+<details>
+  <summary>Spoiler</summary>
+  natas5: iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
+</details>
 
 [Read Next - OverTheWire level 5-9 walkthrough.](2019-03-17-overthewire-natas-5-9.md)
