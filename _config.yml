@@ -52,9 +52,12 @@ author:
   # Used by `jekyll-seo-tag`:
   # twitter:             <username>
   about: |
-    Mainly a java-developer, but has played with C++, javascript, html,
-    css, php, python and perl. Especially interested in performance and
-    security
+    Part time vulnerability, bug and bounty hunter. Enjoy searching for and
+    exploiting vulnerabilities on wargames and ctf's. Will blog about my
+    adventures in wargames, ctf's, bounty hunts, vulnerability explorations,
+    both ups and downs. Hopefully you can learn something by reading
+    and subscribing to my blog.
+
 
 # Add links to the sidebar.
 menu:
